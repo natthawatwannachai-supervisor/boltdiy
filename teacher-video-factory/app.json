@@ -1,0 +1,73 @@
+{
+  "expo": {
+    "name": "Teacher Video Factory",
+    "slug": "teacher-video-factory",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "tvfactory",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "icon": "./assets/icon.png",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "th.co.tvfactory.app",
+      "usesAppleSignIn": true,
+      "infoPlist": {
+        "CFBundleAllowMixedLocalizations": true,
+        "NSPhotoLibraryAddUsageDescription": "แอปขอบันทึกวิดีโอการสอนที่สร้างเสร็จแล้วลงในคลังภาพของคุณ"
+      }
+    },
+    "android": {
+      "package": "th.co.tvfactory.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0B1F5B"
+      },
+      "edgeToEdgeEnabled": true
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single",
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      "expo-apple-authentication",
+      "expo-web-browser",
+      [
+        "expo-notifications",
+        {
+          "color": "#1D4ED8"
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "savePhotosPermission": "แอปขอบันทึกวิดีโอการสอนลงในคลังภาพของคุณ",
+          "isAccessMediaLocationEnabled": false
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#0B1F5B",
+          "image": "./assets/splash.png",
+          "imageWidth": 200
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  }
+}

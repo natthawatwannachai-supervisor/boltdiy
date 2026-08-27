@@ -1,0 +1,56 @@
+project_id = "teacher-video-factory"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "storage", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+major_version = 17
+
+[studio]
+enabled = true
+port = 54323
+
+[storage]
+enabled = true
+file_size_limit = "500MiB"
+
+[auth]
+enabled = true
+site_url = "tvfactory://auth-callback"
+additional_redirect_urls = ["tvfactory://auth-callback", "http://localhost:8081"]
+jwt_expiry = 3600
+enable_refresh_token_rotation = true
+enable_signup = true
+
+[auth.email]
+enable_signup = true
+enable_confirmations = false
+double_confirm_changes = true
+
+[auth.sms]
+enable_signup = true
+enable_confirmations = true
+
+# ผู้ให้บริการ OAuth — ใส่ค่าจริงผ่าน environment variable ไม่ commit ลง repo
+[auth.external.google]
+enabled = false
+client_id = "env(SUPABASE_AUTH_GOOGLE_CLIENT_ID)"
+secret = "env(SUPABASE_AUTH_GOOGLE_SECRET)"
+
+[auth.external.apple]
+enabled = false
+client_id = "env(SUPABASE_AUTH_APPLE_CLIENT_ID)"
+secret = "env(SUPABASE_AUTH_APPLE_SECRET)"
+
+# webhook ถูกเรียกโดยผู้ให้บริการชำระเงิน จึงไม่มี JWT ของผู้ใช้
+[functions.billing-webhook]
+verify_jwt = false
+
+# worker ถูกเรียกโดย pg_cron ด้วย service role key และตรวจ x-worker-secret ซ้ำอีกชั้น
+[functions.job-worker]
+verify_jwt = false
