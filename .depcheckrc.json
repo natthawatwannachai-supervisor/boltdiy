@@ -15,7 +15,8 @@
     "dist",
     "build",
     "node_modules",
-    ".git"
+    ".git",
+    "teacher-video-factory"
   ],
   "skipMissing": false,
   "ignorePatterns": [

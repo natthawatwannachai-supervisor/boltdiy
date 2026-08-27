@@ -4,7 +4,16 @@ import { getNamingConventionRule, tsFileExtensions } from '@blitz/eslint-plugin/
 
 export default [
   {
-    ignores: ['**/dist', '**/node_modules', '**/.wrangler', '**/bolt/build', '**/.history'],
+    ignores: [
+      '**/dist',
+      '**/node_modules',
+      '**/.wrangler',
+      '**/bolt/build',
+      '**/.history',
+
+      // แอป Expo มี lint config ของตัวเอง (`npm run lint` ในโฟลเดอร์นั้น)
+      'teacher-video-factory',
+    ],
   },
   ...blitzPlugin.configs.recommended(),
   {
