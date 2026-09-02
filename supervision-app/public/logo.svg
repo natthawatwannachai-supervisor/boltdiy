@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="ตราสัญลักษณ์ระบบบันทึกรายงานการนิเทศฯ">
+  <defs>
+    <linearGradient id="lg-ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#34D399"/>
+      <stop offset="55%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#0D9488"/>
+    </linearGradient>
+    <linearGradient id="lg-book" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#D7E1EC"/>
+    </linearGradient>
+    <linearGradient id="lg-flame" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <filter id="lg-soft" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0F766E" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <circle cx="128" cy="128" r="120" fill="url(#lg-ring)"/>
+  <circle cx="128" cy="128" r="104" fill="#E0E5EC"/>
+  <circle cx="128" cy="128" r="96" fill="none" stroke="url(#lg-ring)" stroke-width="4" stroke-dasharray="6 10" stroke-linecap="round"/>
+
+  <g filter="url(#lg-soft)">
+    <!-- open book -->
+    <path d="M46 168V92c26-13 52-13 78 0v76c-26-13-52-13-78 0Z" fill="url(#lg-book)"/>
+    <path d="M210 168V92c-26-13-52-13-78 0v76c26-13 52-13 78 0Z" fill="url(#lg-book)"/>
+    <path d="M128 92v76" stroke="#94A3B8" stroke-width="5" stroke-linecap="round"/>
+    <path d="M66 112h44M66 130h44M146 112h44M146 130h44" stroke="#A9B6C6" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- torch of knowledge rising from the book -->
+    <path d="M128 34c14 14 20 26 20 36a20 20 0 1 1-40 0c0-10 6-22 20-36Z" fill="url(#lg-flame)"/>
+    <circle cx="128" cy="74" r="8" fill="#FFF7ED" opacity="0.85"/>
+  </g>
+
+  <!-- magnifier: supervision / monitoring -->
+  <g filter="url(#lg-soft)">
+    <circle cx="176" cy="176" r="30" fill="#E0E5EC" stroke="url(#lg-ring)" stroke-width="9"/>
+    <path d="M198 198l22 22" stroke="url(#lg-ring)" stroke-width="14" stroke-linecap="round"/>
+    <path d="M164 176l9 10 17-20" fill="none" stroke="#10B981" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

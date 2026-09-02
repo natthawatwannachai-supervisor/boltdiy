@@ -1,0 +1,19 @@
+{
+  "name": "supervision-report-functions",
+  "description": "Callable admin operations for the supervision report system",
+  "private": true,
+  "main": "lib/index.js",
+  "engines": { "node": "20" },
+  "scripts": {
+    "build": "tsc",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "deploy": "npm run build && firebase deploy --only functions"
+  },
+  "dependencies": {
+    "firebase-admin": "12.7.0",
+    "firebase-functions": "6.1.1"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3"
+  }
+}

@@ -1,0 +1,34 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn()
+             && firestore.exists(/databases/(default)/documents/admins/$(request.auth.uid));
+    }
+
+    // Signatures are readable by any signed-in user because the admin console
+    // and the PDF generator both need to render them.
+    match /users/{uid}/signature/{file} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn()
+                   && request.auth.uid == uid
+                   && request.resource.size < 5 * 1024 * 1024
+                   && request.resource.contentType.matches('image/.*');
+    }
+
+    match /supervisions/{uid}/{recordId}/{file} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn()
+                   && (request.auth.uid == uid || isAdmin())
+                   && request.resource.size < 2 * 1024 * 1024
+                   && request.resource.contentType.matches('image/.*');
+      allow delete: if isSignedIn() && (request.auth.uid == uid || isAdmin());
+    }
+  }
+}

@@ -1,0 +1,42 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Membership of /admins/{uid} is the single source of truth for admin
+    // rights. Documents there are created from the Firebase console only.
+    function isAdmin() {
+      return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    match /admins/{uid} {
+      allow read: if isSignedIn();
+      allow write: if false; // console / Admin SDK only
+    }
+
+    match /users/{uid} {
+      allow read: if isSignedIn() && (request.auth.uid == uid || isAdmin());
+      // A user creates their own profile at registration and may edit it, but
+      // can never grant themselves a role.
+      allow create: if isSignedIn()
+                    && request.auth.uid == uid
+                    && request.resource.data.role == 'supervisor';
+      allow update: if isAdmin()
+                    || (isSignedIn()
+                        && request.auth.uid == uid
+                        && request.resource.data.role == resource.data.role);
+      allow delete: if isAdmin();
+    }
+
+    match /supervisions/{recordId} {
+      allow read: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if isSignedIn()
+                            && (resource.data.userId == request.auth.uid || isAdmin());
+    }
+  }
+}
